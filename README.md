@@ -77,3 +77,5 @@ These are the various folders and what they are used for:
 
 To run the code, ensure you create a .env file at the root of the project folder and use the example,env file as a reference to what should be contained within your .env file, making sure the password and username is exactly what is contained in your create user command above.
 ** **
+
+Once you are up and running locally, you can find the API swagger Docs at the link: http://127.0.0.1:5000/apidocs/
