@@ -13,3 +13,4 @@ pycodestyle==2.12.1
 pre-commit==3.8.0
 Flask-ReDoc==0.2.1
 flasgger==0.9.7.1
+flask-apispec==0.11.4

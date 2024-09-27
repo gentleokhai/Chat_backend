@@ -3,9 +3,10 @@ from flask_restful import Api
 from flask_jwt_extended import JWTManager
 from flasgger import Swagger
 from models.engines.db_storage import DBStorage
-from views.auth import AuthResource  # Import your AuthResource
+from views.auth import auth_blueprint  # Import your auth blueprint
 from dotenv import load_dotenv
 import os
+
 
 # Load environment variables from .env file
 load_dotenv()
@@ -26,19 +27,8 @@ api = Api(app)
 # Initialize Flasgger
 swagger = Swagger(app)
 
-# Register the authentication route
-api.add_resource(AuthResource, '/api/v1/auth')
-
-
-@app.route('/')
-def index():
-    """A simple route that confirms MongoDB connection.
-    ---
-    responses:
-      200:
-        description: MongoDB connected
-    """
-    return "MongoDB connected using Flask and DBStorage!"
+# Register the authentication routes
+app.register_blueprint(auth_blueprint)
 
 
 if __name__ == '__main__':
