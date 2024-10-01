@@ -5,7 +5,6 @@ Contains the class DBStorage for MongoDB connections.
 from mongoengine import connect
 from os import getenv
 from dotenv import load_dotenv
-import os
 
 # Load environment variables from the .env file
 load_dotenv()

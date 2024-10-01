@@ -17,6 +17,9 @@ COPY . .
 ENV FLASK_APP=web_flask/app.py
 ENV FLASK_RUN_HOST=0.0.0.0
 
+# Set PYTHONPATH to include the app directory
+ENV PYTHONPATH=/app
+
 # Expose the port that the app runs on
 EXPOSE 5000
 
