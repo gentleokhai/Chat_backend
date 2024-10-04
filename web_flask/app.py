@@ -8,7 +8,7 @@ from views.user_management_00 import user_blueprint
 from views.user_management_01 import user_blueprint2
 from dotenv import load_dotenv
 from os import getenv
-
+from views.post import post_blueprint
 
 # Load environment variables from .env file
 load_dotenv()
@@ -37,6 +37,8 @@ app.register_blueprint(auth_blueprint)
 app.register_blueprint(user_blueprint)
 app.register_blueprint(user_blueprint2)
 
+
+app.register_blueprint(post_blueprint)
 
 if __name__ == '__main__':
     # Run the Flask app in debug mode
