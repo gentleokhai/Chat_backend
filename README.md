@@ -5,6 +5,8 @@ This is the Backend Production Repository for the Kozzy web application.
 ## Table of Contents
 - [Running the API in docker compose](#running-the-api-in-docker)
 - [Code Style Verification with Pycodestyle](#code-style-verification-with-pycodestyle)
+- [How to Create Super User](#how-to-create-super-user)
+- [Important Notes](#important-notes)
 
 ## Running the API in docker compose
 
@@ -67,6 +69,18 @@ pycodestyle views/
 pycodestyle models/
 pycodestyle models/engines/
 ```
+## How to create super user
+
+### Step 1:
+
+Go to the root of the project directory and run the following command:
+```bash
+python management/create_superuser.py
+```
+### Step 2:
+
+Follow the prompt and complete all required details for the super user account.
+
 ## Important Notes
 
 These are the various folders and what they are used for:
@@ -74,6 +88,8 @@ These are the various folders and what they are used for:
 * [Engines](models/engines/): scripts to interact with database are saved here
 * [Views](views): All endpoints to be saved here
 * [Web Flask](web_flask): Houses the main flask server code.
+* [decorators](decorators): This folder contains decorator files.
+* [management](management): This folder contains scripts for creating super user and reseting password.
 
 To run the code, ensure you create a .env file at the root of the project folder and use the example.env file as a reference to what should be contained within your .env file, making sure the password and username is exactly what is contained in your create user command above.
 ** **
