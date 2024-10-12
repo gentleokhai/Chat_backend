@@ -39,3 +39,7 @@ class DBStorage:
         """Placeholder method for closing the connection if needed"""
         # In MongoEngine, connections are handled automatically.
         pass
+
+
+# Create a DBStorage instance to manage MongoDB connections
+storage = DBStorage()

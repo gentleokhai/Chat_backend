@@ -4,8 +4,10 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from models.post_model import Post
 from models.user_model import User
 from models.community_model import Community
+from decorators.owner_user import owner_required
 
 post_blueprint = Blueprint('post', __name__)
+
 
 class PostResource(Resource):
     """Handles creating, editing, and deleting posts."""
@@ -60,6 +62,7 @@ class PostResource(Resource):
         return {'message': 'Missing required fields.'}, 400
 
     @jwt_required()
+    @owner_required
     def put(self, post_id):
         """Edit an existing post.
         ---
@@ -97,9 +100,9 @@ class PostResource(Resource):
         """
         data = request.get_json()
         user_id = get_jwt_identity()
-        
+
         post = Post.objects(id=post_id, user_id=user_id).first()
-        
+
         if post:
             if 'title' in data:
                 post.title = data['title']
@@ -107,10 +110,10 @@ class PostResource(Resource):
                 post.body = data['body']
             post.save()
             return {'message': 'Post updated successfully!'}, 200
-        
+
         return {'message': 'Post not found.'}, 404
 
-    @jwt_required()
+    @owner_required
     def delete(self, post_id):
         """Delete a post.
         ---
@@ -134,19 +137,24 @@ class PostResource(Resource):
             description: Post not found
         """
         user_id = get_jwt_identity()
-        
+
         post = Post.objects(id=post_id, user_id=user_id).first()
-        
+
         if post:
             post.delete()
             return {'message': 'Post deleted successfully!'}, 200
-        
+
         return {'message': 'Post not found.'}, 404
+
 
 # Register the resources to the Blueprint
 post_blueprint.add_url_rule(
-    '/api/v1/posts', view_func=PostResource.as_view('create_post'), methods=['POST']
+    '/api/v1/posts',
+    view_func=PostResource.as_view('create_post'),
+    methods=['POST']
 )
 post_blueprint.add_url_rule(
-    '/api/v1/posts/<string:post_id>', view_func=PostResource.as_view('edit_delete_post'), methods=['PUT', 'DELETE']
+    '/api/v1/posts/<string:post_id>',
+    view_func=PostResource.as_view('edit_delete_post'),
+    methods=['PUT', 'DELETE']
 )

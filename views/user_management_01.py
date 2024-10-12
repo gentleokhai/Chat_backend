@@ -3,7 +3,7 @@ from flask_restful import Resource
 from decorators.owner_user import owner_required
 from models.user_model import User
 from werkzeug.security import generate_password_hash
-
+from flask_jwt_extended import jwt_required
 
 user_blueprint2 = Blueprint('user02', __name__)
 

@@ -10,9 +10,9 @@ def superuser_required(f):
     def decorated_function(*args, **kwargs):
         current_user_id = get_jwt_identity()
         user = User.objects(pk=current_user_id).first()
-        if not user or not user.is_superuser:
+        if not user or not (user.is_superuser or user.role == "admin"):
             return jsonify({
-                "error": "You must be a superuser to access this page."
-                }), 403
+                "error": "must be a superuser or admin to access this page."
+            }), 403
         return f(*args, **kwargs)
     return decorated_function

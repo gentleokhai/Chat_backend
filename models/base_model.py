@@ -20,13 +20,14 @@ class BaseModel(Document):
 
     def save(self, *args, **kwargs):
         """Override save to update `updated_at` and `updated_by` fields"""
+        # Update 'updated_by' field when saving
         if 'updated_by' in kwargs:
             self.updated_by = kwargs.pop('updated_by')
         self.updated_at = datetime.now(timezone.utc)
 
-        if not self.created_at:
-            if 'created_by' in kwargs:
-                self.created_by = kwargs.pop('created_by')
+        # Set 'created_by' only once when creating the object
+        if not self.created_at and 'created_by' in kwargs:
+            self.created_by = kwargs.pop('created_by')
 
         return super().save(*args, **kwargs)
 

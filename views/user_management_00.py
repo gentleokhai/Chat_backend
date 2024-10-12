@@ -2,7 +2,7 @@ from flask import Blueprint
 from flask_restful import Resource
 from decorators.super_user import superuser_required
 from models.user_model import User
-
+from flask_jwt_extended import jwt_required
 
 user_blueprint = Blueprint('user', __name__)
 
@@ -39,7 +39,9 @@ class AllUserListResource(Resource):
             {
                 'user_id': user.id,
                 'username': user.username,
-                'email': user.email
+                'email': user.email,
+                'role': user.role,
+                'super user': user.is_superuser
             } for user in users
             ], 200
 
@@ -87,7 +89,8 @@ class SingleUserListResource(Resource):
             return {
                 'user_id': user.id,
                 'username': user.username,
-                'email': user.email
+                'email': user.email,
+                'role': user.role
                 }, 200
         return {'message': 'User not found'}, 404
 
