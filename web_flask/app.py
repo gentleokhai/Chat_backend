@@ -10,6 +10,7 @@ from views.community_management_01 import community_blueprint01
 from views.admin_role_management import role_management_bp
 from views.therapist_management00 import therapist_blueprint
 from views.like_management import like_blueprint
+from views.fetch_post import fetch_post_blueprint
 from dotenv import load_dotenv
 from os import getenv
 from views.post import post_blueprint
@@ -42,6 +43,7 @@ app.register_blueprint(community_blueprint00)
 app.register_blueprint(community_blueprint01)
 app.register_blueprint(therapist_blueprint)
 app.register_blueprint(like_blueprint)
+app.register_blueprint(fetch_post_blueprint)
 
 
 app.register_blueprint(post_blueprint)
